@@ -1,0 +1,8 @@
+streamlit
+numpy
+pandas
+rasterio
+scipy
+scikit-learn
+dask
+matplotlib
