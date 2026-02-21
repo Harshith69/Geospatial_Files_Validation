@@ -1,0 +1,514 @@
+/**
+ * CROP FILLING VALIDATION - Styling
+ * Dark theme with professional UI
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.7)), 
+                url('https://images.pexels.com/photos/27816891/pexels-photo-27816891.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #FFFFFF;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* =============================================================================
+   HEADER SECTION
+   ============================================================================= */
+
+.header-container {
+    padding: 2rem 0 1rem 0;
+    border-bottom: 2px solid #D4FF00;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.header-title {
+    font-family: 'Montserrat', 'Arial Black', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.header-credit {
+    color: #FFFFFF;
+    font-size: 1.3rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+/* =============================================================================
+   MAIN CONTAINER
+   ============================================================================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =============================================================================
+   UPLOAD SECTION
+   ============================================================================= */
+
+.upload-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.upload-container {
+    background-color: rgba(30, 30, 30, 0.85);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(212, 255, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.upload-container:hover {
+    border-color: #D4FF00;
+    background-color: rgba(30, 30, 30, 0.95);
+    box-shadow: 0 0 20px rgba(212, 255, 0, 0.2);
+}
+
+.upload-label {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #D4FF00;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.file-input-label {
+    display: block;
+    padding: 1rem;
+    background-color: rgba(212, 255, 0, 0.1);
+    border: 2px dashed #D4FF00;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: #D4FF00;
+}
+
+.file-input-label:hover {
+    background-color: rgba(212, 255, 0, 0.2);
+    border-style: solid;
+}
+
+.file-list {
+    max-height: 150px;
+    overflow-y: auto;
+    border-top: 1px solid rgba(212, 255, 0, 0.2);
+    padding-top: 1rem;
+}
+
+.file-item {
+    padding: 0.5rem 0;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-item:before {
+    content: '✓ ';
+    color: #D4FF00;
+    font-weight: bold;
+}
+
+/* =============================================================================
+   BUTTONS
+   ============================================================================= */
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: #D4FF00;
+    color: #121212;
+    box-shadow: 0 4px 15px rgba(212, 255, 0, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 20px rgba(212, 255, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: rgba(212, 255, 0, 0.15);
+    color: #D4FF00;
+    border: 1px solid #D4FF00;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: rgba(212, 255, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-download {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+}
+
+.btn-download:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #D4FF00;
+    color: #D4FF00;
+}
+
+/* =============================================================================
+   PROGRESS BAR
+   ============================================================================= */
+
+#progress-container {
+    display: none;
+    background-color: rgba(30, 30, 30, 0.85);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(212, 255, 0, 0.3);
+}
+
+.progress-wrapper {
+    margin-bottom: 1rem;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 8px;
+    background-color: #D4FF00;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 255, 0, 0.5);
+}
+
+.status-text {
+    color: #D4FF00;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* =============================================================================
+   RESULTS SECTION
+   ============================================================================= */
+
+#results-section {
+    display: none;
+    background-color: rgba(30, 30, 30, 0.85);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(212, 255, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+.results-header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #D4FF00;
+    margin-bottom: 1.5rem;
+}
+
+/* TABS */
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(212, 255, 0, 0.2);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tab-button:hover {
+    color: #D4FF00;
+}
+
+.tab-button.active {
+    color: #D4FF00;
+    border-bottom-color: #D4FF00;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* TABLES */
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.results-table thead {
+    background-color: rgba(212, 255, 0, 0.1);
+}
+
+.results-table th {
+    padding: 1rem;
+    text-align: left;
+    color: #D4FF00;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(212, 255, 0, 0.3);
+}
+
+.results-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(212, 255, 0, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.results-table tbody tr:hover {
+    background-color: rgba(212, 255, 0, 0.05);
+}
+
+.no-data {
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+/* DOWNLOAD SECTION */
+
+.download-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(212, 255, 0, 0.2);
+}
+
+.download-button-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.download-button-label {
+    color: rgba(212, 255, 0, 0.8);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* =============================================================================
+   TOAST NOTIFICATIONS
+   ============================================================================= */
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.toast {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.toast-info {
+    background-color: rgba(100, 150, 255, 0.9);
+    color: #FFFFFF;
+}
+
+.toast-success {
+    background-color: rgba(100, 255, 150, 0.9);
+    color: #FFFFFF;
+}
+
+.toast-warning {
+    background-color: rgba(255, 200, 100, 0.9);
+    color: #FFFFFF;
+}
+
+.toast-error {
+    background-color: rgba(255, 100, 100, 0.9);
+    color: #FFFFFF;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================= */
+
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 1.8rem;
+    }
+    
+    .upload-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-table {
+        font-size: 0.8rem;
+    }
+    
+    .results-table th,
+    .results-table td {
+        padding: 0.5rem;
+    }
+    
+    .download-section {
+        grid-template-columns: 1fr;
+    }
+    
+    #toast-container {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+    
+    .tabs {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-button {
+        flex: 1;
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* =============================================================================
+   SCROLLBAR STYLING
+   ============================================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(212, 255, 0, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 255, 0, 0.7);
+}
+
+/* =============================================================================
+   ANIMATIONS
+   ============================================================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.upload-container,
+#results-section,
+#progress-container {
+    animation: fadeIn 0.5s ease;
+}

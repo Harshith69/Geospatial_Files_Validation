@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crop Filling Validation Platform - Compare Legacy vs Wherobots crop segmentation data">
+    <meta name="author" content="Harshith Narasimhamurthy">
+    
+    <title>Crop Filling Validation Platform</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- External Libraries (CDN) -->
+    <!-- GeoTIFF.js - for reading GeoTIFF files in browser -->
+    <script src="https://cdn.jsdelivr.net/npm/geotiff@2.1.0/dist/geotiff.js"></script>
+    
+    <!-- JSZip - for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <!-- PapaParse - for CSV handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- =================================================================
+             HEADER
+             ================================================================= -->
+        <div class="header-container">
+            <div class="header-title">🌍 CROP FILLING VALIDATION PLATFORM</div>
+            <div class="header-credit">Developed by Harshith Narasimhamurthy</div>
+        </div>
+
+        <!-- =================================================================
+             UPLOAD SECTION
+             ================================================================= -->
+        <div class="upload-section">
+            <!-- Legacy Pipeline Files -->
+            <div class="upload-container">
+                <label class="upload-label">📂 Legacy Pipeline</label>
+                <div class="file-input-wrapper">
+                    <input 
+                        type="file" 
+                        id="legacy-file-input" 
+                        multiple 
+                        accept=".tif,.tiff"
+                    >
+                    <label for="legacy-file-input" class="file-input-label">
+                        📁 Click or drag .tif files
+                    </label>
+                </div>
+                <div id="legacy-file-list" class="file-list"></div>
+            </div>
+
+            <!-- Wherobots Pipeline Files -->
+            <div class="upload-container">
+                <label class="upload-label">📂 Wherobots Pipeline</label>
+                <div class="file-input-wrapper">
+                    <input 
+                        type="file" 
+                        id="new-file-input" 
+                        multiple 
+                        accept=".tif,.tiff"
+                    >
+                    <label for="new-file-input" class="file-input-label">
+                        📁 Click or drag .tif files
+                    </label>
+                </div>
+                <div id="new-file-list" class="file-list"></div>
+            </div>
+        </div>
+
+        <!-- =================================================================
+             ACTION BUTTONS
+             ================================================================= -->
+        <div class="button-group">
+            <button id="run-btn" class="btn-primary">
+                ⚡ RUN VALIDATION
+            </button>
+            <button id="reset-btn" class="btn-secondary">
+                🗑️ RESET
+            </button>
+        </div>
+
+        <!-- =================================================================
+             PROGRESS BAR
+             ================================================================= -->
+        <div id="progress-container">
+            <div class="progress-wrapper">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <div id="status-text" class="status-text">Initializing validation...</div>
+        </div>
+
+        <!-- =================================================================
+             RESULTS SECTION
+             ================================================================= -->
+        <div id="results-section">
+            <div class="results-header">📊 VALIDATION RESULTS</div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab-button active" data-tab="summary">
+                    📋 Summary
+                </button>
+                <button class="tab-button" data-tab="mismatch">
+                    ⚠️ Mismatches
+                </button>
+            </div>
+
+            <!-- TAB CONTENT: SUMMARY -->
+            <div id="summary" class="tab-content active">
+                <div id="summary-table"></div>
+            </div>
+
+            <!-- TAB CONTENT: MISMATCH -->
+            <div id="mismatch" class="tab-content">
+                <div id="mismatch-table"></div>
+            </div>
+
+            <!-- DOWNLOAD SECTION -->
+            <div class="download-section">
+                <div class="download-button-wrapper">
+                    <span class="download-button-label">Summary CSV</span>
+                    <button id="download-summary" class="btn-download">
+                        📥 Download
+                    </button>
+                </div>
+                <div class="download-button-wrapper">
+                    <span class="download-button-label">Mismatch CSV</span>
+                    <button id="download-mismatch" class="btn-download">
+                        📥 Download
+                    </button>
+                </div>
+                <div class="download-button-wrapper">
+                    <span class="download-button-label">All Results (ZIP)</span>
+                    <button id="download-all-zip" class="btn-download">
+                        📦 Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- =================================================================
+             FOOTER / ABOUT
+             ================================================================= -->
+        <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(212, 255, 0, 0.2); text-align: center; opacity: 0.7;">
+            <p>
+                Crop Filling Validation Platform | 
+                <a href="https://github.com" style="color: #D4FF00; text-decoration: none;">GitHub</a> | 
+                Version 1.0
+            </p>
+        </footer>
+    </div>
+
+    <!-- =================================================================
+         TOAST CONTAINER (for notifications)
+         ================================================================= -->
+    <div id="toast-container"></div>
+
+    <!-- =================================================================
+         SCRIPTS
+         ================================================================= -->
+    <script src="js/validation.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Tab switching functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab button click handlers
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and content
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(tabName).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
